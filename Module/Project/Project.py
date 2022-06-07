@@ -99,7 +99,7 @@ class Project:
                     Liste_Projection = Liste_Projection)
 
 
-        with open(self.path+'/'+self.Project_name+'.yaml', 'w') as yaml_file:
+        with open(self.Project_name+'.yaml', 'w') as yaml_file:
             yaml.dump(data, yaml_file, default_flow_style=False)
 
     def open(self, Project_path):
