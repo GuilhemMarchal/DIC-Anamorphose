@@ -1,4 +1,5 @@
 import sympy as sym
+import numpy as np
 from sympy import Symbol
 
 class Surface:
