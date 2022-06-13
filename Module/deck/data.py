@@ -48,9 +48,10 @@ class Deck():
                     self.Position_centre = np.array(self.Input_Speckle['Position_centre'], dtype = float)
 
                     self.Surface = self.deck['Surface']
-                    self.a = float(self.Surface['a'])
-                    self.b = float(self.Surface['b'])
-                    self.c = float(self.Surface['c'])
+                    self.Angle = int(self.Surface['Angle'])
+                    self.a = -np.sin((self.Angle+90)*np.pi/180)
+                    self.b = 0
+                    self.c = -np.cos((self.Angle+90)*np.pi/180)
                     self.Position = np.array(self.Surface['Position'], dtype = float)
                     self.Radius = float(self.Surface['Radius'])
                     self.Surface_type = self.Surface['Surface_type']
@@ -77,9 +78,10 @@ class Deck():
                     self.Position_centre = np.array(self.Input_Speckle['Position_centre'], dtype = float)
 
                     self.Surface = self.doc['Surface']
-                    self.a = float(self.Surface['a'])
-                    self.b = float(self.Surface['b'])
-                    self.c = float(self.Surface['c'])
+                    self.Angle = int(self.Surface['Angle'])
+                    self.a = -np.sin((self.Angle+90)*np.pi/180)
+                    self.b = 0
+                    self.c = -np.cos((self.Angle+90)*np.pi/180)
                     self.Position = np.array(self.Surface['Position'], dtype = float)
                     self.Radius = float(self.Surface['Radius'])
                     self.Surface_type = self.Surface['Surface_type']
