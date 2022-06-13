@@ -17,9 +17,9 @@ Input_speckle:
                    #[2.6516760266572756,0.105,-0.0625620275974964]]
 
 Surface : 
-  Angle: 60
-  Lenght: 400 #mm
-  Width_Surface: 200 #mm
+  Angle: 70 #deg
+  #Lengh_Surface: 400 #mm
+  #Width_Surface: 200 #mm
   Radius : 0.4
   Position : [2.30076106,  0.        ,-0.01743114855]
   Surface_type : 'Plan'
