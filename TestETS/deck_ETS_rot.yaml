@@ -17,16 +17,17 @@ Input_speckle:
                    #[2.6516760266572756,0.105,-0.0625620275974964]]
 
 Surface : 
-  Angle: 70 #deg
-  #Lengh_Surface: 400 #mm
-  #Width_Surface: 200 #mm
+  Angle : 70 #deg
+  Length_Surface : 0.4 #m
+  Width_Surface : 0.2 #m
+  Dist_cam : 2.5 #m
   Radius : 0.4
   Position : [2.30076106,  0.        ,-0.01743114855]
   Surface_type : 'Plan'
-  Wingframe : [[ 2.30076106,  0.        , -0.01743114855],
-               [ 2.69923894 ,  0.        ,  0.01743114855],
-               [ 2.5,  0.1         , 0],
-               [ 2.5, -0.1       , 0]]
+  #Wingframe : [[ 2.30076106,  0.        , -0.01743114855],
+               #[ 2.69923894 ,  0.        ,  0.01743114855],
+               #[ 2.5,  0.1         , 0],
+               #[ 2.5, -0.1       , 0]]
 
 Output_speckle:
   Height_printable: 27.9e-2

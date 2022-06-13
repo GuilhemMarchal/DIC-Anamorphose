@@ -52,10 +52,17 @@ class Deck():
                     self.a = -np.sin((self.Angle+90)*np.pi/180)
                     self.b = 0
                     self.c = -np.cos((self.Angle+90)*np.pi/180)
+                    self.Length_Surface = float(self.Surface['Length_Surface'])
+                    self.Width_Surface = float(self.Surface['Width_Surface'])
+                    self.Dist_cam = float(self.Surface['Dist_cam'])
                     self.Position = np.array(self.Surface['Position'], dtype = float)
                     self.Radius = float(self.Surface['Radius'])
                     self.Surface_type = self.Surface['Surface_type']
-                    self.Wingframe = np.array(self.Surface['Wingframe'], dtype = float)
+                    #self.Wingframe = np.array(self.Surface['Wingframe'], dtype = float)
+                    self.Wingframe = [[ float(self.Dist_cam - np.sin(self.Angle*np.pi/180)*self.Length_Surface/2),  float(0)        , float(-np.cos(self.Angle*np.pi/180)*self.Length_Surface/2)],
+                                      [ float(self.Dist_cam + np.sin(self.Angle*np.pi/180)*self.Length_Surface/2) ,    float(0)      ,  float(np.cos(self.Angle*np.pi/180)*self.Length_Surface/2)],
+                                      [ float(self.Dist_cam),  float(self.Width_Surface/2)         , float(0)],
+                                      [ float(self.Dist_cam), float(-self.Width_Surface/2)         , float(0)]]
 
                     self.Output_Speckle = self.deck['Output_speckle']
                     self.Height_printable = float(self.Output_Speckle['Height_printable'])
@@ -82,10 +89,16 @@ class Deck():
                     self.a = -np.sin((self.Angle+90)*np.pi/180)
                     self.b = 0
                     self.c = -np.cos((self.Angle+90)*np.pi/180)
+                    self.Length_Surface = float(self.Surface['Length_Surface'])
+                    self.Width_Surface = float(self.Surface['Width_Surface'])
+                    self.Dist_cam = float(self.Surface['Dist_cam'])
                     self.Position = np.array(self.Surface['Position'], dtype = float)
                     self.Radius = float(self.Surface['Radius'])
                     self.Surface_type = self.Surface['Surface_type']
-                    self.Wingframe = np.array(self.Surface['Wingframe'], dtype = float)
+                    self.Wingframe = [[ float(self.Dist_cam - np.sin(self.Angle*np.pi/180)*self.Length_Surface/2),  float(0)        , float(-np.cos(self.Angle*np.pi/180)*self.Length_Surface/2)],
+                                      [ float(self.Dist_cam + np.sin(self.Angle*np.pi/180)*self.Length_Surface/2) ,    float(0)      ,  float(np.cos(self.Angle*np.pi/180)*self.Length_Surface/2)],
+                                      [ float(self.Dist_cam),  float(self.Width_Surface/2)         , float(0)],
+                                      [ float(self.Dist_cam), float(-self.Width_Surface/2)         , float(0)]]
 
                     self.Output_Speckle = self.doc['Output_speckle']
                     self.Height_printable = float(self.Output_Speckle['Height_printable'])
