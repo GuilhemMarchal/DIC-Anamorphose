@@ -102,15 +102,6 @@ class Deck():
                     self.Length_Surface = float(self.Surface['Length_Surface'])
                     self.Width_Surface = float(self.Surface['Width_Surface'])
                     self.Dist_cam = float(self.Surface['Dist_cam'])
-                    self.NbImageH = int(self.Width_Surface/self.Width)+1
-                    self.NbImageV = int(self.Length_Surface*np.cos(self.Angle*np.pi/180)/self.Height)+1
-                    self.NbImage = self.NbImageH*self.NbImageV
-                    self.Position_centre = np.zeros([self.NbImage,3])
-                    for i in range(1,self.NbImageV+1):
-                        for j in range(1,self.NbImageH+1):
-                            self.Position_centre[(i-1)*self.NbImageH+(j-1),0] = self.Dist_cam - np.sin(self.Angle*np.pi/180)*self.Length_Surface/2
-                            self.Position_centre[(i-1)*self.NbImageH+(j-1),1] = self.Width_Surface/2 - self.Width/2 - (j-1)*self.Width
-                            self.Position_centre[(i-1)*self.NbImageH+(j-1),2] = self.Height/2 - np.cos(self.Angle*np.pi/180)*self.Length_Surface/2+(i-1)*self.Height
                     #self.Position = np.array(self.Surface['Position'], dtype = float)
                     self.Radius = float(self.Surface['Radius'])
                     self.Surface_type = self.Surface['Surface_type']
@@ -118,6 +109,20 @@ class Deck():
                                       [ float(self.Dist_cam + np.sin(self.Angle*np.pi/180)*self.Length_Surface/2) ,    float(0)      ,  float(np.cos(self.Angle*np.pi/180)*self.Length_Surface/2)],
                                       [ float(self.Dist_cam),  float(self.Width_Surface/2)         , float(0)],
                                       [ float(self.Dist_cam), float(-self.Width_Surface/2)         , float(0)]])
+                    self.NbImageH = int(self.Width_Surface/self.Width)+1
+                    self.NbImageV = int(self.Length_Surface*np.cos(self.Angle*np.pi/180)/self.Height)+1
+                    self.Z_proj = self.Height*(self.NbImageV-1)*self.Wingframe[1,0]/self.Wingframe[0,0]
+                    self.Surface_Height = self.Wingframe[1,2]-self.Wingframe[0,2]
+                    while (self.Z_proj - self.Surface_Height) >= 0 and (self.NbImageV) >1:
+                        self.NbImageV -= 1
+                        self.Z_proj = self.Z_proj/self.NbImageV*(self.NbImageV-1)
+                    self.NbImage = self.NbImageH*self.NbImageV
+                    self.Position_centre = np.zeros([self.NbImage,3])
+                    for i in range(1,self.NbImageV+1):
+                        for j in range(1,self.NbImageH+1):
+                            self.Position_centre[(i-1)*self.NbImageH+(j-1),0] = self.Dist_cam - np.sin(self.Angle*np.pi/180)*self.Length_Surface/2
+                            self.Position_centre[(i-1)*self.NbImageH+(j-1),1] = self.Width_Surface/2 - self.Width/2 - (j-1)*self.Width
+                            self.Position_centre[(i-1)*self.NbImageH+(j-1),2] = self.Height/2 - np.cos(self.Angle*np.pi/180)*self.Length_Surface/2+(i-1)*self.Height
                     self.Position = self.Wingframe[0]
 
                     self.Output_Speckle = self.doc['Output_speckle']
