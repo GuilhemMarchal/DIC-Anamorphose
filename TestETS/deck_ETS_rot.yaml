@@ -9,20 +9,20 @@ Input_speckle:
   Width: 21e-2
   Path: './Banque_Speckle/2mm/'
   Generic_name: 'Speckle_'
-  NbImage: 1
-  Position_centre: [[2.30076106, 0, 0.1175688515]]#, 
+  #NbImage: 1
+  #Position_centre: [[2.30076106, 0, 0.1175688515]]#, 
                    #[2.6516760266572756, -0.21, -0.3325620275974964], 
                    #[2.6516760266572756, 0.21, -0.3325620275974964],
                    #[2.6516760266572756,-0.105,-0.0625620275974964],
                    #[2.6516760266572756,0.105,-0.0625620275974964]]
 
 Surface : 
-  Angle : 70 #deg
-  Length_Surface : 0.4 #m
-  Width_Surface : 0.2 #m
-  Dist_cam : 2.5 #m
+  Angle : 78 #deg
+  Length_Surface : 3.0 #m
+  Width_Surface : 0.6 #m
+  Dist_cam : 4.12 #m
   Radius : 0.4
-  Position : [2.30076106,  0.        ,-0.01743114855]
+  #Position : [2.30076106,  0.        ,-0.01743114855]
   Surface_type : 'Plan'
   #Wingframe : [[ 2.30076106,  0.        , -0.01743114855],
                #[ 2.69923894 ,  0.        ,  0.01743114855],
