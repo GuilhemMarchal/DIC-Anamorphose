@@ -3,7 +3,7 @@ Camera:
   Sensor_height: 6.6 #mm
 
 Input_speckle: 
-  Step: 100
+  Step: 500
   Begining: 3
   Height: 27e-2
   Width: 21e-2
