@@ -165,6 +165,8 @@ def Print(deck, yf, zf, Liste_Feuille, Liste_depliage, CadreAileUnfolded):
     PrintPath = deck.Print_path
     widthPrintable = deck.Width_printable
     heightPrintable = deck.Height_printable
+    Width_Surface = deck.Width_Surface
+    Length_Surface = deck.Length_Surface
     Nbimage = deck.NbImage
 
     #Decoupe la derniere figure en morceau de taille (widthPrintable,heightPrintable)
@@ -173,9 +175,29 @@ def Print(deck, yf, zf, Liste_Feuille, Liste_depliage, CadreAileUnfolded):
     for f in files:
         os.remove(f)
 
+    figure = plt.figure(Nbimage+3)
+    figure.set_size_inches(Width_Surface/0.0254,Length_Surface/0.0254)
+    axe = plt.gca()
+    x_axis = axe.axes.get_xaxis()
+    x_axis.set_visible(False)
+    y_axis = axe.axes.get_yaxis()
+    y_axis.set_visible(False)
+    for j in range(Nbimage):
+        for i in range(Liste_Feuille[j].debut, len(Liste_Feuille[j].contours), Liste_Feuille[j].saut):
+            plt.plot(Liste_depliage[j][i][:, 1], Liste_depliage[j][i][:, 2], color='black')
+            plt.fill(Liste_depliage[j][i][:, 1], Liste_depliage[j][i][:, 2], color='black')
+    plt.axis('equal')
+    plt.xlim(min(CadreAileUnfolded[:,1]), max(CadreAileUnfolded[:,1]))
+    plt.ylim(min(CadreAileUnfolded[:,2]), max(CadreAileUnfolded[:,2]))
+    plt.box(False)
+    plt.close(figure)
+    figure.tight_layout()
+    figure.savefig(PrintPath + '/Unfolded.pdf')
+
+
     for i in range (yf.shape[0]-1):
         for j in range (yf.shape[1]-1):
-            fig = plt.figure((i+1)*(j+1)+Nbimage+3)
+            fig = plt.figure((i+1)*(j+1)+Nbimage+3+1)
             fig.set_size_inches(widthPrintable/0.0254, heightPrintable/0.0254)
             ax = fig.add_subplot(111, aspect='equal')
             axe = plt.gca()
