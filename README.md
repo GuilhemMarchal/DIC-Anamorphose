@@ -12,7 +12,7 @@ To use main.py, you also have to download Module folder. If you want to open ana
 
 ### deck_ETS_rot.yaml initialisation
 
-Main structure for `deck.yaml` file:
+Main structure for `deck_ETS_rot.yaml` file:
 
 ```
 Camera:
@@ -86,7 +86,9 @@ Then you must to implement the surface properties :
 - *Dist_cam* represents the distance between the camera rig and the middle of the surface in meter.
 - *Radius* is the radius of the cylinder in the case of a cylinder.
 - *Surface_type* is a string to tell the programm that you want to anamorphose on a `Cylindre` or on a `Plan`. Only cylinder or plane surface case are implemented.
+
 For now the Cylinder surface type isn't implemented.
+
 From these surface properties, the normal vector of the plan of the wing, the wingframe position (1,2,3 and 4 on the underneath figure) and the number and position of speckle sheets are calculated.
 
 <p align="center">
