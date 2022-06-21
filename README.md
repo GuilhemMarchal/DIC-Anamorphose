@@ -10,7 +10,7 @@
 To begin, you have to download some packages listed in the requirements.txt file
 To use main.py, you also have to download Module folder. If you want to open anamorphosed speckle project, you can download the Open_project.py file
 
-### deck.yaml initialisation
+### deck_ETS_rot.yaml initialisation
 
 Main structure for `deck.yaml` file:
 
@@ -20,31 +20,25 @@ Camera:
   Sensor_height: 29 #mm
 
 Input_speckle: 
-  Step: 500
+  Step: 100
   Begining: 3
   Height: 27e-2
   Width: 21e-2
-  Path: './Banque_Speckle/2mm'
+  Path: './Banque_Speckle/2mm/'
   Generic_name: 'Speckle_'
-  NbImage: 1
-  Position_centre: [[2, 0, 0], [2, -21e-2, 0], [2, 21e-2, 0]]
 
 Surface : 
-  a: 0
-  b: 0
-  c: 1
+  Angle : 78 #deg
+  Length_Surface : 3.0 #m 
+  Width_Surface : 0.6 #m 
+  Dist_cam : 4.12 #m 
   Radius : 0.4
-  Position : [3, 0, 0]
-  Surface_type : 'Cylindre'
-  Wingframe : [[ 2.6,  0.,   .5],
-               [ 2.6,  0.,  -.5],
-               [ 3.,  -0.4,  0. ],
-               [ 3.,   0.4,  0. ]]
+  Surface_type : 'Plan'
 
 Output_speckle:
   Height_printable: 27.9e-2
   Width_printable: 21.6e-2
-  Print_path: './ImagePrintable'
+  Print_path: './AnamorphosePlane/ImagePrintable'
 ```
 #### Camera section
 ```
@@ -57,18 +51,16 @@ Camera:
 #### Input_Speckle section
 ```
 Input_speckle: 
-  Step: 500
+  Step: 100
   Begining: 3
   Height: 27e-2
   Width: 21e-2
-  Path: './Banque_Speckle/2mm'
+  Path: './Banque_Speckle/2mm/'
   Generic_name: 'Speckle_'
-  NbImage: 1
-  Position_centre: [[2, 0, 0], [2, -21e-2, 0], [2, 21e-2, 0]]
 ```
-Due to the multitude of points in the speckle, to test the code, we only anamorphose a few points. The variable *Step* represents the anamorphic step. `step=2` will anamorphose half of all the points of a sheet of speckles.
+Due to the multitude of points in the speckle, to test the code, we only anamorphose a few points. The variable *Step* represents the anamorphic step. `step=X` will anamorphose 1/X of all the points of a sheet of speckles.
 
-*Begining* variable represents the first index of the contour list calculated by OpenCV to be considered ine the anamorphosis. Usually `begining=3` is often sufficient to avoid black filling of the result by the algorithm.
+*Begining* variable represents the first index of the contour list calculated by OpenCV to be considered in the anamorphosis. Usually `begining=3` is often sufficient to avoid black filling of the result by the algorithm. The index before 3 in the contour list usually represent the contour of the sheet hence the black filling.
 
 You need to implement the size of the speckle sheets you want to anamorphose and the size of the anamorphosed speckle sheets you want to get. Use the *Height*, *Width*. The unit is meter.
 
@@ -76,34 +68,30 @@ You need to implement the size of the speckle sheets you want to anamorphose and
 
 *Generic_name* is the name of your speckle sheets. It as to be the shape of *Generic_Name_XX* with XX a number.
 
-*NbImage* is the number of sheets you want to anamorphose.
-
-In the *Position_centre* list you must put the center position of all your sheets. It is organised like [x, y, z] refering to the figure.
-
-<p align="center">
-  <img width="628" alt="Capture d’écran 2021-11-09 à 20 24 42" src="https://user-images.githubusercontent.com/84194324/141032568-872ec514-2716-4acb-a321-eb7dfd5d4731.png">
-</p>
 
 #### Surface section
 ```
 Surface : 
-  a: 0
-  b: 0
-  c: 1
+  Angle : 78 #deg
+  Length_Surface : 3.0 #m 
+  Width_Surface : 0.6 #m 
+  Dist_cam : 4.12 #m 
   Radius : 0.4
-  Position : [3, 0, 0]
-  Surface_type : 'Cylindre'
-  Wingframe : [[ 2.6,  0.,   .5],
-               [ 2.6,  0.,  -.5],
-               [ 3.,  -0.4,  0. ],
-               [ 3.,   0.4,  0. ]]
+  Surface_type : 'Plan'
 ```
 Then you must to implement the surface properties :
-- *(a, b, c)* vector represents the normal vector in case of a plane surface and the axis of a cylinder in the case of a cylinder surface case.
-- `Position=[Posx, Posy, Posz]` array represents the position relative to the camera of a point belongs to the axis of the cylinder (if the surface is a cylinder).
+- *Angle* represents the angle between the plane of the sensor and of the wing.
+- *Length_Surface* represents the length of the surface in meter.
+- *Width_Surface* represents the width of the surface in meter.
+- *Dist_cam* represents the distance between the camera rig and the middle of the surface in meter.
 - *Radius* is the radius of the cylinder in the case of a cylinder.
 - *Surface_type* is a string to tell the programm that you want to anamorphose on a `Cylindre` or on a `Plan`. Only cylinder or plane surface case are implemented.
-- *Wingframe* is the border of your wing represented by 4 points. It will be useful to represent your wing in 3D and print the anamorphosed speckle. It is organised as [x, y, z].
+For now the Cylinder surface type isn't implemented.
+From these surface properties, the normal vector of the plan of the wing, the wingframe position (1,2,3 and 4 on the underneath figure) and the number and position of speckle sheets are calculated.
+
+<p align="center">
+  <img width="628" alt="Capture d’écran 2021-11-09 à 20 24 42" src="https://user-images.githubusercontent.com/84194324/141032568-872ec514-2716-4acb-a321-eb7dfd5d4731.png">
+</p>
 
 #### Output_Speckle section
 ```
@@ -115,15 +103,8 @@ Output_speckle:
 *Height_printable* and *Width_printable* variables are the height and the width of the anarmophosed speckle you want to print. 
 *Print_path* is the path of the anamorphosed speckle sheets folder.
 
-## AnamorphosePlanaire.py
-
-Image warping on a plane with cv2.warpPerspective.
-It was just a test program.
 
 ## Trucs à faire
 
-- Améliorer temps de traitements : Parallélisation du calcul des projections de chaque feuille.
-                                   Utilisation des equations analytiques pour s'affranchir de sympy.solve.
-                                   Approximation numérique de la solution de la projection.
-- Déplier une surface polynomiale quelconque.
+- Développer le programme pour y ajouter la surface cylindrique
 - Effectuer l'anamorphose dans un espace où la caméra n'est plus le centre et orienté dans n'importe quelle direction.
