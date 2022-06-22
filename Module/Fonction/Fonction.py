@@ -171,10 +171,14 @@ def Print(deck, yf, zf, Liste_Feuille, Liste_depliage, CadreAileUnfolded):
 
     #Decoupe la derniere figure en morceau de taille (widthPrintable,heightPrintable)
     #pour pouvoir l'imprimer facilement. Sauvegarde dans un folder au format .pdf
+    #Sauvegarde l'image entière en dans un folder au format .png
     files = glob.glob(PrintPath + '/*.pdf')
     for f in files:
         os.remove(f)
-
+    files = glob.glob(PrintPath + '/*.png')
+    for f in files:
+        os.remove(f)
+    
     figure = plt.figure(Nbimage+3)
     figure.set_size_inches(Width_Surface/0.0254,Length_Surface/0.0254)
     axe = plt.gca()
@@ -182,6 +186,7 @@ def Print(deck, yf, zf, Liste_Feuille, Liste_depliage, CadreAileUnfolded):
     x_axis.set_visible(False)
     y_axis = axe.axes.get_yaxis()
     y_axis.set_visible(False)
+    plt.fill(255,255,255)
     for j in range(Nbimage):
         for i in range(Liste_Feuille[j].debut, len(Liste_Feuille[j].contours), Liste_Feuille[j].saut):
             plt.plot(Liste_depliage[j][i][:, 1], Liste_depliage[j][i][:, 2], color='black')
@@ -192,7 +197,7 @@ def Print(deck, yf, zf, Liste_Feuille, Liste_depliage, CadreAileUnfolded):
     plt.box(False)
     plt.close(figure)
     figure.tight_layout()
-    figure.savefig(PrintPath + '/Unfolded.pdf')
+    figure.savefig(PrintPath + '/Unfolded.png')
 
 
     for i in range (yf.shape[0]-1):
