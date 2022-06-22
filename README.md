@@ -85,7 +85,7 @@ Then you must to implement the surface properties :
 - *Width_Surface* represents the width of the surface in meter.
 - *Dist_cam* represents the distance between the camera rig and the middle of the surface in meter.
 - *Radius* is the radius of the cylinder in the case of a cylinder.
-- *Surface_type* is a string to tell the programm that you want to anamorphose on a `Cylindre` or on a `Plan`. For now the Cylinder surface type isn't implemented.
+- *Surface_type* is a string to tell the programm that you want to anamorphose on a `Cylindre` or on a `Plan`. Only cylinder or plane surface case are implemented.
 
 From these surface properties, the normal vector of the plan of the wing, the wingframe position (1,2,3 and 4 on the underneath figure) and the number and position of speckle sheets are calculated.
 
