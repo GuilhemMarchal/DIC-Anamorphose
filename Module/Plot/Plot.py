@@ -197,7 +197,7 @@ class Plot:
             for i in range (Liste_Feuille[j].debut, len(Liste_Feuille[j].contours), Liste_Feuille[j].saut):
                 ax.plot(Liste_Feuille[j].contours3D[i][:, 0], Liste_Feuille[j].contours3D[i][:, 1], Liste_Feuille[j].contours3D[i][:, 2], color='k', marker=None)
                 ax.plot(Liste_Projection[j][i][:, 0], Liste_Projection[j][i][:, 1], Liste_Projection[j][i][:, 2], color='k', marker=None)
-                ax.scatter([Liste_Feuille[j].d]*4, Liste_Feuille[j].Cadre[:,0], Liste_Feuille[j].Cadre[:,1], color='k', marker='+')
+                ax.scatter([Liste_Feuille[j].d]*4, Liste_Feuille[j].Cadre[:,0], Liste_Feuille[j].Cadre[:,1], color='red', marker='+')
         ax.scatter(CadreAile[:,0], CadreAile[:,1], CadreAile[:,2], color='c', label='Wingframe')
         for i in range (0,len(CadreAile[:,0])):
             ax.text(CadreAile[i,0], CadreAile[i,1], CadreAile[i,2], str(i+1))
