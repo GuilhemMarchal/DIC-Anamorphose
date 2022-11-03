@@ -63,9 +63,9 @@ class Deck():
                         self.Position = self.Wingframe[0]
                         self.NbImageH = int(self.Width_Surface/self.Width)+1
                         self.NbImageV = int(self.Length_Surface*np.cos(self.Angle*np.pi/180)/self.Height)+1
-                        self.Z_proj = self.Height*(self.NbImageV-1)*self.Wingframe[1,0]/self.Wingframe[0,0]
                         self.Surface_Height = self.Wingframe[1,2]-self.Wingframe[0,2]
-                        while (self.Z_proj - self.Surface_Height) >= 0 and (self.NbImageV) >1:
+                        self.Z_proj = (self.Height-self.Surface_Height/2)*(self.NbImageV-1)*self.Wingframe[1,0]/self.Wingframe[0,0]                     
+                        while (self.Z_proj - self.Surface_Height/2) >= 0 and (self.NbImageV) >1:
                             self.NbImageV -= 1
                             self.Z_proj = self.Z_proj/self.NbImageV*(self.NbImageV-1)
                         self.NbImage = self.NbImageH*self.NbImageV
@@ -100,8 +100,8 @@ class Deck():
                         self.Position = np.array([self.Wingframe[2][0],0,self.Wingframe[2][2]])
                         self.NbImageH = int(self.Width_Surface/self.Width)+1
                         self.NbImageV = int((self.Length_Surface*np.cos(self.Angle*np.pi/180)+self.Radius*np.sin(self.Angle*np.pi/180))/self.Height)+1
-                        self.Z_proj = (self.Height*(self.NbImageV-1)-self.Radius*np.sin(self.Angle*np.pi/180))*self.Wingframe[1,0]/self.Wingframe[0,0]
                         self.Surface_Height = self.Wingframe[1,2]-self.Wingframe[0,2]
+                        self.Z_proj = (self.Height*(self.NbImageV-1)-self.Radius*np.sin(self.Angle*np.pi/180))*self.Wingframe[1,0]/self.Wingframe[0,0]
                         while (self.Z_proj - self.Surface_Height) >= 0 and (self.NbImageV) >1:
                             self.NbImageV -= 1
                             self.Z_proj = self.Z_proj/(self.Height*self.NbImageV-self.Radius*np.sin(self.Angle*np.pi/180))*(self.Height*(self.NbImageV-1)-self.Radius*np.sin(self.Angle*np.pi/180))
@@ -150,9 +150,9 @@ class Deck():
                         self.Position = self.Wingframe[0]
                         self.NbImageH = int(self.Width_Surface/self.Width)+1
                         self.NbImageV = int(self.Length_Surface*np.cos(self.Angle*np.pi/180)/self.Height)+1
-                        self.Z_proj = self.Height*(self.NbImageV-1)*self.Wingframe[1,0]/self.Wingframe[0,0]
                         self.Surface_Height = self.Wingframe[1,2]-self.Wingframe[0,2]
-                        while (self.Z_proj - self.Surface_Height) >= 0 and (self.NbImageV) >1:
+                        self.Z_proj = (self.Height-self.Surface_Height/2)*(self.NbImageV-1)*self.Wingframe[1,0]/self.Wingframe[0,0]
+                        while (self.Z_proj - self.Surface_Height/2) >= 0 and (self.NbImageV) >1:
                             self.NbImageV -= 1
                             self.Z_proj = self.Z_proj/self.NbImageV*(self.NbImageV-1)
                         self.NbImage = self.NbImageH*self.NbImageV

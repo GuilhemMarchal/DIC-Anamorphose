@@ -168,6 +168,7 @@ def Print(deck, yf, zf, Liste_Feuille, Liste_depliage, CadreAileUnfolded):
     Width_Surface = deck.Width_Surface
     Length_Surface = deck.Length_Surface
     Nbimage = deck.NbImage
+    List_image = deck.Images()
 
     #Decoupe la derniere figure en morceau de taille (widthPrintable,heightPrintable)
     #pour pouvoir l'imprimer facilement. Sauvegarde dans un folder au format .pdf
@@ -189,8 +190,8 @@ def Print(deck, yf, zf, Liste_Feuille, Liste_depliage, CadreAileUnfolded):
     plt.fill(255,255,255)
     for j in range(Nbimage):
         for i in range(Liste_Feuille[j].debut, len(Liste_Feuille[j].contours), Liste_Feuille[j].saut):
-            plt.plot(Liste_depliage[j][i][:, 1], Liste_depliage[j][i][:, 2], color='black')
-            plt.fill(Liste_depliage[j][i][:, 1], Liste_depliage[j][i][:, 2], color='black')
+            # plt.plot(Liste_depliage[j][i][:, 1], Liste_depliage[j][i][:, 2], color='black')
+            plt.fill(Liste_depliage[j][i][:, 1], Liste_depliage[j][i][:, 2], color='black',linewidth = 1,ec=None)
     plt.axis('equal')
     plt.xlim(min(CadreAileUnfolded[:,1]), max(CadreAileUnfolded[:,1]))
     plt.ylim(min(CadreAileUnfolded[:,2]), max(CadreAileUnfolded[:,2]))
@@ -198,6 +199,32 @@ def Print(deck, yf, zf, Liste_Feuille, Liste_depliage, CadreAileUnfolded):
     plt.close(figure)
     figure.tight_layout()
     figure.savefig(PrintPath + '/Unfolded.png')
+
+    Nbimage =deck.NbImage
+    for i in range(Nbimage):
+        figr=plt.figure("Ref" + str(i + 1))
+        figr.set_size_inches(deck.Width/0.0254,deck.Height/0.0254)
+        axe = plt.gca()
+        x_axis = axe.axes.get_xaxis()
+        x_axis.set_visible(False)
+        y_axis = axe.axes.get_yaxis()
+        y_axis.set_visible(False)
+        plt.fill(255,255,255)
+        # ax = figr.add_subplot(111, aspect='equal')
+        for j in range(Liste_Feuille[i].debut, len(Liste_Feuille[i].contours), Liste_Feuille[i].saut):
+            # plt.plot(Liste_Feuille[i].contours[j][:, 0][:, 0], Liste_Feuille[i].contours[j][:, 0][:, 1],color='black')
+            plt.fill(Liste_Feuille[i].contours[j][:, 0][:, 0], Liste_Feuille[i].contours[j][:, 0][:, 1], color = 'black',linewidth = 1, ec = None)
+        plt.axis('equal')
+        img = List_image[i]
+        H = img.shape[0]
+        W = img.shape[1]
+        plt.xlim(0, W)
+        plt.ylim(0, H)
+        plt.box(False)
+        plt.close(figr)
+        figr.tight_layout()
+        figr.savefig(PrintPath + '/Ref' + str(i+1) + '.png', dpi=W/(deck.Width/0.0254),pad_inches = 0)
+
 
 
     for i in range (yf.shape[0]-1):
@@ -212,8 +239,8 @@ def Print(deck, yf, zf, Liste_Feuille, Liste_depliage, CadreAileUnfolded):
             y_axis.set_visible(False)
             for m in range(Nbimage):
                 for l in range(Liste_Feuille[m].debut, len(Liste_Feuille[m].contours), Liste_Feuille[m].saut):
-                    plt.plot(Liste_depliage[m][l][:, 1], Liste_depliage[m][l][:, 2], color='k')
-                    plt.fill(Liste_depliage[m][l][:, 1], Liste_depliage[m][l][:, 2], color='k')
+                    # plt.plot(Liste_depliage[m][l][:, 1], Liste_depliage[m][l][:, 2], color='k')
+                    plt.fill(Liste_depliage[m][l][:, 1], Liste_depliage[m][l][:, 2], color='k',linewidth = 1,ec = None)
             plt.scatter(CadreAileUnfolded[:,1], CadreAileUnfolded[:,2], color='c', marker='+')
             plt.scatter(yf, zf, marker='+', color='m')
             plt.axis('equal')

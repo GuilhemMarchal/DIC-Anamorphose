@@ -232,7 +232,7 @@ class Plot:
             ax = fig.add_subplot(111, aspect='equal')
             for j in range(Liste_Feuille[i].debut, len(Liste_Feuille[i].contours), Liste_Feuille[i].saut):
                 ax.plot(Liste_Feuille[i].contours[j][:, 0][:, 0], Liste_Feuille[i].contours[j][:, 0][:, 1], marker=None, color='k')
-                ax.fill(Liste_Feuille[i].contours[j][:, 0][:, 0], Liste_Feuille[i].contours[j][:, 0][:, 1], 'k', zorder=10)
+                ax.fill(Liste_Feuille[i].contours[j][:, 0][:, 0], Liste_Feuille[i].contours[j][:, 0][:, 1], 'k', zorder=100)
 
             ax.set_title('Image référence '+ str(i+1) +' (pix)')
 

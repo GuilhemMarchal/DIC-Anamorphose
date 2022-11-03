@@ -84,6 +84,31 @@ class Sheets:
         
         # Transformation coordonées contours repère 2D en repère 3D
         self.contours3D = [None]*len(self.contours)
+
+        ## TEST ##
+        MAX_X = 0
+        MAX_Y = 0
+        for i in range(self.debut, len(self.contours), self.saut):
+            if max(self.contours[i][:,0][:][:,0]) > MAX_X:
+                MAX_X = max(self.contours[i][:,0][:][:,0])
+            if max(self.contours[i][:,0][:][:,1]) > MAX_Y:
+                MAX_Y = max(self.contours[i][:,0][:][:,1])
+        index = []
+        for i in range(self.debut, len(self.contours), self.saut):
+            if max(self.contours[i][:,0][:][:,0]) == MAX_X or min (self.contours[i][:,0][:][:,0]) == 0 or max(self.contours[i][:,0][:][:,1]) == MAX_Y or min (self.contours[i][:,0][:][:,1]) == 0:
+                index.append(i)
+        for i in range(len(index)):
+            index_corr = index[i]-i
+            if index_corr < len(self.contours):
+                self.contours = self.contours[:index_corr] + self.contours[index_corr+1:]
+            else:
+                self.contours = self.contours[:index_corr]
+        for i in range(self.debut, len(self.contours)):
+            for j in range(len(self.contours[i][:,0][:,1])):
+                self.contours[i][:,0][j,1] = MAX_Y - int(self.contours[i][:,0][j,1])
+
+        ## TEST ##
+        print('index = ', index)
         for i in range(self.debut, len(self.contours), self.saut):
             '''Opencv met l'ordonnée en premiere position des tableau et l'abscisse en seconde
             C'est pour ca que les indices semblent inversés (H<->V)'''
