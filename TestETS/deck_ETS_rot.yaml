@@ -1,20 +1,20 @@
 Camera:
-  Focal_length: 35 #mm
-  Sensor_height: 6.6 #mm
+  Focal_length: 35 #mm 1.8661
+  Sensor_height: 6.6 #8.8 #mm 3.42
 
 Input_speckle: 
-  Step: 100
-  Begining: 3
-  Height: 27e-2
+  Step: 1
+  Begining: 0
+  Height: 35e-2   #27e-2
   Width: 21e-2
-  Path: './Banque_Speckle/2mm/'
+  Path: './Banque_Speckle/2mmH35_75%/'
   Generic_name: 'Speckle_'
 
 Surface : 
-  Angle : 70 #deg 78
-  Length_Surface : 0.4 #m 3.0
-  Width_Surface : 0.2 #m 0.26
-  Dist_cam : 2.5 #m 4.12
+  Angle : 70 #deg 
+  Length_Surface : 1.2 #m 0.4
+  Width_Surface : 0.2 #m 0.4
+  Dist_cam : 2.5 #m 1.5
   Radius : 0.4
   Surface_type : 'Plan'
 
