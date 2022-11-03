@@ -60,7 +60,7 @@ Input_speckle:
 ```
 Due to the multitude of points in the speckle, to test the code, we only anamorphose a few points. The variable *Step* represents the anamorphic step. `step=X` will anamorphose 1/X of all the points of a sheet of speckles.
 
-*Begining* variable represents the first index of the contour list calculated by OpenCV to be considered in the anamorphosis. Usually `begining=3` is often sufficient to avoid black filling of the result by the algorithm. The index before 3 in the contour list usually represent the contour of the sheet hence the black filling.
+*Begining* variable represents the first index of the contour list calculated by OpenCV to be considered in the anamorphosis. Usually `begining=3` is often sufficient to avoid black filling of the result by the algorithm. The index before 3 in the contour list usually represent the contour of the sheet hence the black filling. Lastest adds should now remove black filling even if 'begining=0'.
 
 You need to implement the size of the speckle sheets you want to anamorphose and the size of the anamorphosed speckle sheets you want to get. Use the *Height*, *Width*. The unit is meter.
 
